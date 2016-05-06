@@ -18,7 +18,8 @@ class LibuserAdmin(admin.ModelAdmin):
     inlines = [BookInline, DvdInline]
 
 class BookAdmin(admin.ModelAdmin):
-    fields = [('title', 'author', 'pubyr'), ('checked_out', 'itemtype', 'user', 'duedate'),'category']
+    #fields = [('title', 'author', 'pubyr'), ('checked_out', 'itemtype', 'user', 'duedate'),'category']
+    fieldsets = ( ('Item Info',{'fields':(('title', 'author'),('pubyr', 'itemtype'))}), ('Other Info', {'fields':('user', 'duedate', 'last_chkout')}) )
     list_display = ('title', 'borrower')
 
     def borrower(self, obj=None):
@@ -29,7 +30,8 @@ class BookAdmin(admin.ModelAdmin):
 
 
 class DvdAdmin(admin.ModelAdmin):
-    fields = [('title', 'maker', 'pubyr'), ('instructor', 'checked_out', 'itemtype', 'user', 'duedate'),'rating']
+    #fields = [('title', 'maker', 'pubyr'), ('instructor', 'checked_out', 'itemtype', 'user', 'duedate'),'rating']
+    fieldsets = ( ('Item Info',{'fields':(('title', 'maker'),('pubyr', 'itemtype'))}), )
     list_display = ('title', 'rating', 'borrower')
 
     def borrower(self, obj=None):
