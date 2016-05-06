@@ -69,6 +69,8 @@ class Dvd(Libitem):
     maker = models.CharField(max_length=100)
     duration = models.IntegerField(default=1)
     rating = models.IntegerField(choices=CATEGORY_CHOICES, default=1)
+    instructor = models.CharField(max_length=100, default='')
+
 
     def __str__(self):
         return self.title + ' by ' + self.maker
