@@ -1,6 +1,13 @@
 from django.contrib import admin
 from library.models import Book, Dvd, Libuser, Libitem
+from datetime import datetime, timedelta
 # Register your models here.
+
+def renew(modeladmin, request, queryset):
+    queryset.filter(checked_out=True).update(duedate=datetime.today()+timedelta(days=21))
+renew.short_description = "Change duedate to 3 weeks from today’s date"
+
+
 
 
 class DvdInline(admin.TabularInline):
@@ -21,6 +28,7 @@ class BookAdmin(admin.ModelAdmin):
     #fields = [('title', 'author', 'pubyr'), ('checked_out', 'itemtype', 'user', 'duedate'),'category']
     fieldsets = ( ('Item Info',{'fields':(('title', 'author'),('pubyr', 'itemtype'))}), ('Other Info', {'fields':('user', 'duedate', 'last_chkout')}) )
     list_display = ('title', 'borrower')
+    actions = [renew]
 
     def borrower(self, obj=None):
         if obj.checked_out == True:
@@ -28,11 +36,11 @@ class BookAdmin(admin.ModelAdmin):
         else:
             return ''
 
-
 class DvdAdmin(admin.ModelAdmin):
     #fields = [('title', 'maker', 'pubyr'), ('instructor', 'checked_out', 'itemtype', 'user', 'duedate'),'rating']
     fieldsets = ( ('Item Info',{'fields':(('title', 'maker'),('pubyr', 'itemtype'))}), )
     list_display = ('title', 'rating', 'borrower')
+    actions = [renew]
 
     def borrower(self, obj=None):
         if obj.checked_out == True:

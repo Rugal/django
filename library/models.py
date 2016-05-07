@@ -1,5 +1,5 @@
 from django.db import models
-import datetime
+from datetime import datetime, timedelta
 from django.contrib.auth.models import User
 
 # Create your models here.
@@ -33,8 +33,12 @@ class Libitem(models.Model):
     user=models.ForeignKey(Libuser, default=None, null=True, blank=True)
     duedate=models.DateField(default=None, null=True, blank=True)
     last_chkout = models.DateField(default=None, null=True, blank=True)
-    date_acquired = models.DateField(default=datetime.date.today())
+    date_acquired = models.DateField(default=datetime.today())
     pubyr = models.IntegerField()
+
+    def overdue(self):
+        return self.checked_out == True and self.duedate < datetime.today()
+
 
     def __str__(self):
         return self.title
