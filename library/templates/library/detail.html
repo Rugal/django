@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>My Library APP</title>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td>Title</td>
+                <td>{{ item.title }}</td>
+            </tr>
+            <tr>
+                <td>Year of publish</td>
+                <td>{{ item.pubyr }}</td>
+            </tr>
+            {% if item.itemtype == 'Book' %}
+            <tr>
+                <td>Author</td>
+                <td>{{ item.book.author }}</td>
+            </tr>
+            <tr>
+                <td>Category</td>
+                <td>{{ item.book.category }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td>Maker</td>
+                <td>{{ item.dvd.maker }}</td>
+            </tr>
+            <tr>
+                <td>Duration</td>
+                <td>{{ item.dvd.duration }}</td>
+            </tr>
+            <tr>
+                <td>Rating</td>
+                <td>{{ item.dvd.rating }}</td>
+            </tr>
+            {% endif %}
+        </table>
+        <p><a href="{% url 'library:index' %}">Go to home</a></p>
+    </body>
+</html>
