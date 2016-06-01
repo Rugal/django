@@ -37,7 +37,7 @@ class Libitem(models.Model):
     pubyr = models.IntegerField()
 
     def overdue(self):
-        return 'Yes' if self.checked_out == True and self.duedate < datetime.today() else 'No'
+        return 'Yes' if self.checked_out == True and self.duedate < datetime.today().date() else 'No'
 
 
     def __str__(self):

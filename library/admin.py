@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 
 def renew(modeladmin, request, queryset):
     queryset.filter(checked_out=True).update(duedate=datetime.today()+timedelta(days=21))
-renew.short_description = "Change duedate to 3 weeks from today’s date"
+renew.short_description = "Change duedate to 3 weeks from today"
 
 class DvdInline(admin.TabularInline):
     model = Dvd # This shows all fields of Book.
