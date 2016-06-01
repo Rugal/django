@@ -1,0 +1,10 @@
+ .hbar1 {
+    display: inline;
+    margin: 15px;
+} 
+
+body
+{
+    /*background:  url("../img/background.jpg");*/
+    background-color: #2b2b2b;
+}

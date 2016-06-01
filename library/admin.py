@@ -7,9 +7,6 @@ def renew(modeladmin, request, queryset):
     queryset.filter(checked_out=True).update(duedate=datetime.today()+timedelta(days=21))
 renew.short_description = "Change duedate to 3 weeks from today’s date"
 
-
-
-
 class DvdInline(admin.TabularInline):
     model = Dvd # This shows all fields of Book.
     exclude = ('last_chkout', 'date_acquired')
@@ -27,7 +24,7 @@ class LibuserAdmin(admin.ModelAdmin):
 class BookAdmin(admin.ModelAdmin):
     #fields = [('title', 'author', 'pubyr'), ('checked_out', 'itemtype', 'user', 'duedate'),'category']
     fieldsets = ( ('Item Info',{'fields':(('title', 'author'),('pubyr', 'itemtype'))}), ('Other Info', {'fields':('user', 'duedate', 'last_chkout')}) )
-    list_display = ('title', 'borrower')
+    list_display = ('title', 'borrower', 'overdue')
     actions = [renew]
 
     def borrower(self, obj=None):
