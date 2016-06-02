@@ -1,10 +1,5 @@
 {% extends 'library/base.html' %}
-
-
-{% block myhdg %}
-Hello 
-{% endblock %}
-
+{% load staticfiles%}
 {% block body_block %}
 {% if itemlist %}
 <h2>List of Library items</h2>
@@ -16,4 +11,21 @@ Hello
 {% else %}
 <strong>There are no available items!</strong>
 {% endif %}
+<div class="row">
+    <div class="col-md-4">
+        <h2>Available Books</h2>
+        <p>Show books that are available to students</p>
+        <p><a class="btn btn-default" href="book.html" role="button"><img src="{% static 'library/img/book.jpg' %}" alt="book" class="img-rounded img-clickable"></a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Available DVDs</h2>
+        <p>Show DVDs that are available to students</p>
+        <p><a class="btn btn-default" href="dvd.html" role="button"><img  src="{% static 'library/img/dvd.jpg' %}" alt="dvd" class="img-rounded img-clickable"></a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Other Items</h2>
+        <p>Other item that are available to students</p>
+        <p><a class="btn btn-default" href="other.html" role="button"><img src="{% static 'library/img/other.jpg' %}" alt="other" class="img-rounded img-clickable"></a></p>
+    </div>
+</div>
 {% endblock %}

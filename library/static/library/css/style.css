@@ -1,0 +1,19 @@
+.img-clickable
+{
+    /*max-width: 50%;*/
+    width: 300px;
+    /*max-height: 50%; */
+    height: 350px;
+}
+
+
+body
+{
+    background:  url("../img/background.jpg");
+    background-color: #2b2b2b;
+}
+
+.jumbotron
+{
+    background-color: transparent !important;
+}
