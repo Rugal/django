@@ -17,3 +17,4 @@ def detail(request, item_id):
         item = Libitem.objects.get(id=item_id)
     except Exception as e:
         return get_object_or_404(Libitem, id=item_id)
+    return render(request, 'library/detail.html', {'item': item})
