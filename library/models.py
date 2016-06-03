@@ -78,3 +78,19 @@ class Dvd(Libitem):
 
     def __str__(self):
         return self.title + ' by ' + self.maker
+
+class Suggestion(models.Model):
+    TYPE_CHOICES = (
+    (1, 'Book'),
+    (2,'DVD'),
+    (3, 'Other'),
+    )
+    title = models.CharField(max_length=100)
+    pubyr = models.IntegerField(null=True, blank=True)
+    type = models.IntegerField(default=1, choices=TYPE_CHOICES)
+    cost = models.IntegerField()
+    num_interested = models.IntegerField()
+    comments = models.TextField(null=True)
+
+    def __str__(self):
+        return self.title
