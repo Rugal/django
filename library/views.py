@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from library.models import Book, Dvd, Libuser, Libitem, Suggestion
-from library.forms import SuggestionForm
+from library.forms import SuggestionForm, SearchlibForm
 from django.shortcuts import get_object_or_404
 
 
@@ -15,10 +15,7 @@ def about(request):
     return render(request, 'library/about.html')
 
 def detail(request, item_id):
-    try:
-        item = Libitem.objects.get(id=item_id)
-    except Exception as e:
-        return get_object_or_404(Libitem, id=item_id)
+    item = get_object_or_404(Libitem, id=item_id)
     return render(request, 'library/detail.html', {'item': item})
 
 def suggestions(request):
@@ -39,3 +36,21 @@ def newitem(request):
     else:
         form = SuggestionForm()
     return render(request, 'library/newitem.html', {'form':form, 'suggestions':suggestions})
+
+def searchlib(request):
+    form = SearchlibForm()
+    itemlist=[]
+    if request.method == 'POST':
+        form = SearchlibForm(request.POST)
+        if not form.is_valid():
+            return render(request, 'library/searchlib.html', {'form':form})
+        data = form.cleaned_data
+        if data['author'] or data['title']:
+            if data['author'] and data['title']:
+                itemlist = Book.objects.filter(title__contains=data['title'], author=data['author'])
+            else:
+                if data['title']:
+                    itemlist = Book.objects.filter(title__contains=data['title'])
+                else:
+                    itemlist = Book.objects.filter(author=data['author'])
+    return render(request, 'library/searchlib.html', {'form':form, 'itemlist':itemlist})

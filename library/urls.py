@@ -21,5 +21,6 @@ urlpatterns = [
     url(r'^about$', views.about, name='about'),
     url(r'^suggestions$', views.suggestions, name='suggestions'),
     url(r'^newitem$', views.newitem, name='newitem'),
+    url(r'^searchlib$', views.searchlib, name='searchlib'),
     url(r'^(?P<item_id>\d+)$', views.detail, name='detail'),
 ]

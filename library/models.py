@@ -85,6 +85,7 @@ class Suggestion(models.Model):
     (2,'DVD'),
     (3, 'Other'),
     )
+
     title = models.CharField(max_length=100)
     pubyr = models.IntegerField(null=True, blank=True)
     type = models.IntegerField(default=1, choices=TYPE_CHOICES)

@@ -128,7 +128,7 @@
         <!-- Main jumbotron for a primary marketing message or call to action -->
         <div class="jumbotron">
             <div class="container">
-                <h1>{% block myhdg %}Hello User {% endblock %}</h1>
+                <h1>{% block myhdg %}Hello {{request.user}} {% endblock %} </h1>
                 <p><a class="btn btn-primary btn-lg" href="#about" data-toggle="modal" data-target="#aboutModal" role="button">Learn more &raquo;</a></p>
             </div>
         </div>
