@@ -1,5 +1,5 @@
 from django.contrib import admin
-from library.models import Book, Dvd, Libuser, Libitem
+from library.models import Book, Dvd, Libuser, Libitem, Suggestion
 from datetime import datetime, timedelta
 # Register your models here.
 
@@ -43,7 +43,10 @@ class DvdAdmin(admin.ModelAdmin):
         if obj.checked_out == True:
             return obj.user.username + '  checked out' #Returns the user who has borrowed this book
 
+class SuggestionAdmin(admin.ModelAdmin):
+    pass
 
 admin.site.register(Book, BookAdmin)
+admin.site.register(Suggestion, SuggestionAdmin)
 admin.site.register(Dvd, DvdAdmin)
 admin.site.register(Libuser, LibuserAdmin)

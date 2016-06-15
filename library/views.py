@@ -50,7 +50,7 @@ def searchlib(request):
                 itemlist = Book.objects.filter(title__contains=data['title'], author=data['author'])
             else:
                 if data['title']:
-                    itemlist = Book.objects.filter(title__contains=data['title'])
+                    itemlist = Libitem.objects.filter(title__contains=data['title'])
                 else:
                     itemlist = Book.objects.filter(author=data['author'])
     return render(request, 'library/searchlib.html', {'form':form, 'itemlist':itemlist})
