@@ -8,7 +8,7 @@
 <h2>List of Library items</h2>
 <ol>
     {% for item in itemlist %}
-    <li> {{ item.itemtype }}: {{ item}} </li>
+    <li> {{ item.itemtype }}:  <a href="{% url 'library:detail' item.pk %}">  {{ item}}</a> </li>
     {% endfor %}
 </ol>
 {% else %}
