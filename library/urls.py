@@ -23,4 +23,6 @@ urlpatterns = [
     url(r'^newitem$', views.newitem, name='newitem'),
     url(r'^searchlib$', views.searchlib, name='searchlib'),
     url(r'^(?P<item_id>\d+)$', views.detail, name='detail'),
+    url(r'^login$', views.user_login, name='login'),
+    url(r'^logout$', views.user_logout, name='logout'),
 ]
