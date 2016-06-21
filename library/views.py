@@ -77,3 +77,15 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse(('library:index')))
+
+
+@login_required
+def myitems(request):
+    items=[]
+    message=''
+    try:
+        user = Libuser.objects.get(username = request.user.username)
+        items = Libitem.objects.filter(user = user)
+    except Libuser.DoesNotExist:
+        message = 'You are not a Libuser!'
+    return render(request, 'library/myitems.html', {'user':request.user, 'itemlist':items, 'message':message})

@@ -51,6 +51,8 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+LOGIN_URL = '/library/index.html'
+
 ROOT_URLCONF = 'windsor.urls'
 
 TEMPLATES = [

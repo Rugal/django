@@ -1,0 +1,16 @@
+{% extends 'library/base.html' %}
+
+{% block body_block %}
+{% if not message %}
+    {% if itemlist %}
+        Items you checked out<BR>
+        {% for item in itemlist %}
+        <li> {{ item.itemtype }}:  <a href="{% url 'library:detail' item.pk %}">  {{ item}}</a> </li>
+        {% endfor %}
+    {% else %}
+        You haven't checked out anything
+    {% endif %}
+{% else %}
+    {{message}}
+{% endif %}
+{% endblock %}
