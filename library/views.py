@@ -5,16 +5,21 @@ from library.forms import SuggestionForm, SearchlibForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.urlresolvers import reverse
+import random
 
 
 # Import necessary classes
 # Create your views here.
 def index(request):
     itemlist = Libitem.objects.all().order_by('title')[:10]
-    return render(request, 'library/index.html', {'itemlist': itemlist, 'user':request.user})
+    luckynum = request.session.get('luckynum', 0)
+    return render(request, 'library/index.html', {'itemlist': itemlist, 'user':request.user, 'luckynum':luckynum})
 
 def about(request):
-    return render(request, 'library/about.html')
+    visits = request.session.get('about_visits', 0)
+    request.session['about_visits'] = visits + 1
+    request.session.set_expiry(60*5)
+    return render(request, 'library/about.html', {'visits':visits})
 
 def detail(request, item_id):
     item = get_object_or_404(Libitem, id=item_id)
@@ -65,6 +70,8 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
+                request.session['luckynum']= random.randrange(1, 9, 1)
+                request.session.set_expiry(60*60)
                 return HttpResponseRedirect(reverse('library:index'))
             else:
                 return HttpResponse('Your account is disabled.')

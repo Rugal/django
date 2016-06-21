@@ -4,6 +4,7 @@
 
 
 {% block body_block %}
+Your lucky number is {% if luckynum %} {{luckynum}} {% else %} 0 {% endif %}
 {% if itemlist %}
 <h2>List of Library items</h2>
 <ol>
