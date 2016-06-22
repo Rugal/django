@@ -144,9 +144,10 @@
                     <a class="navbar-brand" href="{% url 'library:index' %}"><i class="material-icons">navigation</i>Home</a>
                     <a class="navbar-brand" href="#about" data-toggle="modal" data-target="#aboutModal"><i class="material-icons">info_outline</i>About</a>
                     <a class="navbar-brand" href="{% url 'library:suggestions' %}"><i class="material-icons">shopping_cart</i>Suggestions</a>
-                    <a class="navbar-brand" href="#account"  data-toggle="modal" data-target="#accountModal"><i class="material-icons">person_pin</i>My Account</a>
                     {% if user.is_authenticated %}
+                    <a class="navbar-brand" href="#account"  data-toggle="modal" data-target="#accountModal"><i class="material-icons">person_pin</i>My Account</a>
                     <a class="navbar-brand" href="{% url 'library:myitems' %}" ><i class="material-icons">shopping_basket</i>My item</a>
+                    <a class="navbar-brand" href="{% url 'library:newitem' %}"><i class="material-icons">grade</i>New item</a>
                     <a class="navbar-brand" href="{% url 'library:logout' %}" ><i class="material-icons">settings_power</i>Logout</a>
                     {% else %}
                     <a class="navbar-brand" href="#register" data-toggle="modal" data-target="#registerModal"><i class="material-icons">system_update_alt</i>Register</a>

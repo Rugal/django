@@ -91,7 +91,7 @@ class Suggestion(models.Model):
     type = models.IntegerField(default=1, choices=TYPE_CHOICES)
     cost = models.IntegerField()
     num_interested = models.IntegerField()
-    comments = models.TextField(null=True)
+    comments = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.title
