@@ -1,9 +1,11 @@
 {% extends 'library/base.html' %}
 
 {% block body_block %}
+
+
 <form action="{% url 'library:newitem' %}" method="POST">
     {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit" />
+    {{form}}
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 {% endblock %}

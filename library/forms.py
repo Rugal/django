@@ -6,10 +6,15 @@ class SuggestionForm(forms.ModelForm):
     class Meta:
         model = Suggestion
         fields = ['title', 'pubyr', 'type', 'cost', 'comments']
-        widgets = {'type':forms.RadioSelect()}
+        widgets = {'type':forms.RadioSelect(),
+                'title':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Title'}),
+                'cost':forms.NumberInput(attrs={'class':'form-control', 'placeholder':'Cost'}),
+                'pubyr':forms.NumberInput(attrs={'class':'form-control', 'placeholder':'Publish year'}),
+                'comments':forms.Textarea(attrs={'class':'form-control', 'placeholder':'Comments'}),
+                }
         labels = {'cost':'Estimated Cost in Dollars'}
 
 class SearchlibForm(forms.Form):
-    title = forms.CharField(required=False)
-    author = forms.CharField(required=False)
+    title = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Title'}))
+    author = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Author'}))
 

@@ -132,8 +132,8 @@
                 </div>
             </div>
         </div>
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
+        <nav class="navbar navbar-inverse narvar-fixed-top">
+            <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
@@ -141,29 +141,36 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{% url 'library:index' %}"><i class="material-icons">navigation</i>Home</a>
-                    <a class="navbar-brand" href="#about" data-toggle="modal" data-target="#aboutModal"><i class="material-icons">info_outline</i>About</a>
-                    <a class="navbar-brand" href="{% url 'library:searchlib' %}"><i class="material-icons">play_arrow</i>Search</a>
-                    <a class="navbar-brand" href="{% url 'library:suggestions' %}"><i class="material-icons">shopping_cart</i>Suggestions</a>
-                    {% if user.is_authenticated %}
-                    <a class="navbar-brand" href="#account"  data-toggle="modal" data-target="#accountModal"><i class="material-icons">person_pin</i>My Account</a>
-                    <a class="navbar-brand" href="{% url 'library:myitems' %}" ><i class="material-icons">shopping_basket</i>My item</a>
-                    <a class="navbar-brand" href="{% url 'library:newitem' %}"><i class="material-icons">grade</i>New item</a>
-                    <a class="navbar-brand" href="{% url 'library:logout' %}" ><i class="material-icons">settings_power</i>Logout</a>
-                    {% else %}
-                    <a class="navbar-brand" href="#register" data-toggle="modal" data-target="#registerModal"><i class="material-icons">system_update_alt</i>Register</a>
-                    <a class="navbar-brand" href="#loginModal" data-toggle="modal" data-target="#loginModal"><i class="material-icons">call_received</i>Login</a>
-                    {% endif %}
+                    <a class="navbar-brand" href="{% url 'library:index' %}"><i class="material-icons small">navigation</i>Home</a>
                 </div>
-            </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a class="navbar-brand"  data-toggle="modal" data-target="#aboutModal"><i class="material-icons small">info_outline</i>About</a>
+                        <li><a class="navbar-brand" href="{% url 'library:searchlib' %}"><i class="material-icons small">search</i>Search</a></li>
+                        <li><a class="navbar-brand" href="{% url 'library:suggestions' %}"><i class="material-icons small">shopping_cart</i>Suggestions</a></li>
+                        <li><a class="navbar-brand" href="{% url 'library:newitem' %}"><i class="material-icons small">grade</i>New item</a></li>
+                    </ul>
+                    {% if user.is_authenticated %}
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{request.user}} <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'library:myitems' %}" ><i class="material-icons small">shopping_basket</i>My item</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a  href="{% url 'library:logout' %}" ><i class="material-icons small">settings_power</i>Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    {% else %}
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a class="navbar-brand" href="#register" data-toggle="modal" data-target="#registerModal"><i class="material-icons small">system_update_alt</i>Register</a></li>
+                        <li><a class="navbar-brand" href="#loginModal" data-toggle="modal" data-target="#loginModal"><i class="material-icons small">call_received</i>Login</a></li>
+                    </ul>
+                    {% endif %}
+                </div><!--/.nav-collapse -->
+            </div><!--/.container-fluid -->
         </nav>
         <!-- Main jumbotron for a primary marketing message or call to action -->
-        <div class="jumbotron">
-            <div class="container">
-                <h1>{% block myhdg %}Hello {{request.user}} {% endblock %} </h1>
-                <p><a class="btn btn-primary btn-lg" href="#about" data-toggle="modal" data-target="#aboutModal" role="button">Learn more &raquo;</a></p>
-            </div>
-        </div>
         <div class="container">
             {% block body_block %}*** {% endblock %}
         </div> <!-- /container -->

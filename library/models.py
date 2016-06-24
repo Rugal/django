@@ -88,8 +88,8 @@ class Suggestion(models.Model):
 
     title = models.CharField(max_length=100, null=True)
     pubyr = models.IntegerField(null=True, blank=True)
-    type = models.IntegerField(default=1, choices=TYPE_CHOICES)
     cost = models.IntegerField()
+    type = models.IntegerField(default=1, choices=TYPE_CHOICES)
     num_interested = models.IntegerField()
     comments = models.TextField(null=True, blank=True)
 

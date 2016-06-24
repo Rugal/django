@@ -50,7 +50,7 @@ def searchlib(request):
     if request.method == 'POST':
         form = SearchlibForm(request.POST)
         if not form.is_valid():
-            return render(request, 'library/searchlib.html', {'form':form, 'user':request.user})
+            return render(request, reverse('library:searchlib'), {'form':form, 'user':request.user})
         data = form.cleaned_data
         if data['author'] or data['title']:
             if data['author'] and data['title']:
@@ -84,7 +84,6 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse(('library:index')))
-
 
 @login_required
 def myitems(request):
