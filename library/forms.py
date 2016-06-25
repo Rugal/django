@@ -15,6 +15,5 @@ class SuggestionForm(forms.ModelForm):
         labels = {'cost':'Estimated Cost in Dollars'}
 
 class SearchlibForm(forms.Form):
-    title = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Title'}))
-    author = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Author'}))
-
+    title = forms.CharField(label="", required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Title'}))
+    author = forms.CharField(label="", required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Author'}))

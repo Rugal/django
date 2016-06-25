@@ -92,22 +92,6 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" role="dialog" id="accountModal" aria-labelledby="accountModal">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" >My Account</h4>
-                    </div>
-                    <div class="modal-body">
-                        Hello {{request.user}}
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="modal fade" role="dialog" id="loginModal" data-backdrop=true aria-labelledby="loginModal">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -145,15 +129,15 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a class="navbar-brand"  data-toggle="modal" data-target="#aboutModal"><i class="material-icons small">info_outline</i>About</a>
+                        <li><a class="navbar-brand" href="" data-toggle="modal" data-target="#aboutModal"><i class="material-icons small">info_outline</i>About</a>
                         <li><a class="navbar-brand" href="{% url 'library:searchlib' %}"><i class="material-icons small">search</i>Search</a></li>
-                        <li><a class="navbar-brand" href="{% url 'library:suggestions' %}"><i class="material-icons small">shopping_cart</i>Suggestions</a></li>
-                        <li><a class="navbar-brand" href="{% url 'library:newitem' %}"><i class="material-icons small">grade</i>New item</a></li>
+                        <li><a class="navbar-brand" href="{% url 'library:suggestions' %}"><i class="material-icons small">work</i>Suggestions</a></li>
+                        <li><a class="navbar-brand" href="{% url 'library:newitem' %}"><i class="material-icons small">new_releases</i>New item</a></li>
                     </ul>
                     {% if user.is_authenticated %}
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{request.user}} <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="material-icons small">dashboard</i>{{request.user}} <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="{% url 'library:myitems' %}" ><i class="material-icons small">shopping_basket</i>My item</a></li>
                                 <li role="separator" class="divider"></li>

@@ -1,15 +1,6 @@
 {% extends 'library/base.html' %}
 
 {% block body_block %}
-<form action="{% url 'library:searchlib' %}" method="POST" class="form-inline">
-    {% csrf_token %}
-    {{ form }}
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-</form>
-<p>
-{% if itemlist %}
 <table class="table table-bordered table-hover">
     <thead class="thead-inverse">
         <tr>
@@ -21,10 +12,9 @@
     {% for item in itemlist %}
     <tr>
         <td>{{ item.itemtype }}</td>
-        <td><a href="{% url 'library:detail' item.pk %}">{{ item.title }}</a></td>
+        <td>{{ item.title }}</td>
         <td>{{ item.pubyr }}</td>
     </tr>
     {% endfor %}
 </table>
-{%endif%}
 {% endblock %}

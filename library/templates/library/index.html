@@ -1,35 +1,25 @@
 {% extends 'library/base.html' %}
 {% load staticfiles%}
 
+	<h1>Welcome to MAC Library</h1>
 
 
 {% block body_block %}
-Your lucky number is {% if luckynum %} {{luckynum}} {% else %} 0 {% endif %}
-{% if itemlist %}
-<h2>List of Library items</h2>
-<ol>
-    {% for item in itemlist %}
-    <li> {{ item.itemtype }}:  <a href="{% url 'library:detail' item.pk %}">  {{ item}}</a> </li>
-    {% endfor %}
-</ol>
-{% else %}
-<strong>There are no available items!</strong>
-{% endif %}
 <div class="row">
     <div class="col-md-4">
         <h2>Available Books</h2>
         <p>Show books that are available to students</p>
-        <p><a class="btn btn-default" href="book.html" role="button"><img src="{% static 'library/img/book.jpg' %}" alt="book" class="img-rounded img-clickable"></a></p>
+        <p><a class="btn btn-default" href="{% url 'library:book' %}" role="button"><img src="{% static 'library/img/book.jpg' %}" alt="book" class="img-rounded img-clickable"></a></p>
     </div>
     <div class="col-md-4">
         <h2>Available DVDs</h2>
         <p>Show DVDs that are available to students</p>
-        <p><a class="btn btn-default" href="dvd.html" role="button"><img  src="{% static 'library/img/dvd.jpg' %}" alt="dvd" class="img-rounded img-clickable"></a></p>
+        <p><a class="btn btn-default" href="{% url 'library:dvd' %}" role="button"><img  src="{% static 'library/img/dvd.jpg' %}" alt="dvd" class="img-rounded img-clickable"></a></p>
     </div>
     <div class="col-md-4">
         <h2>Other Items</h2>
         <p>Other item that are available to students</p>
-        <p><a class="btn btn-default" href="other.html" role="button"><img src="{% static 'library/img/other.jpg' %}" alt="other" class="img-rounded img-clickable"></a></p>
+        <p><a class="btn btn-default" href="#" role="button"><img src="{% static 'library/img/other.jpg' %}" alt="other" class="img-rounded img-clickable"></a></p>
     </div>
 </div>
 {% endblock %}

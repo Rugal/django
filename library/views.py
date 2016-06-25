@@ -11,15 +11,16 @@ import random
 # Import necessary classes
 # Create your views here.
 def index(request):
-    itemlist = Libitem.objects.all().order_by('title')[:10]
     luckynum = request.session.get('luckynum', 0)
-    return render(request, 'library/index.html', {'itemlist': itemlist, 'user':request.user, 'luckynum':luckynum})
+    return render(request, 'library/index.html', {'user':request.user, 'luckynum':luckynum})
 
-def about(request):
-    visits = request.session.get('about_visits', 0)
-    request.session['about_visits'] = visits + 1
-    request.session.set_expiry(60*5)
-    return render(request, 'library/about.html', {'visits':visits})
+def dvd(request):
+    dvd = Dvd.objects.all()
+    return render(request, 'library/list.html', {'itemlist': dvd, 'user':request.user})
+
+def book(request):
+    book = Book.objects.all()
+    return render(request, 'library/list.html', {'itemlist': book, 'user':request.user})
 
 def detail(request, item_id):
     item = get_object_or_404(Libitem, id=item_id)
