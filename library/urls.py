@@ -17,9 +17,9 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^suggestions$', views.suggestions, name='suggestions'),
-    url(r'^newitem$', views.newitem, name='newitem'),
+    url(r'^newitem$', views.NewitemView.as_view(), name='newitem'),
     url(r'^searchlib$', views.searchlib, name='searchlib'),
     url(r'^(?P<item_id>\d+)$', views.detail, name='detail'),
     url(r'^login$', views.user_login, name='login'),

@@ -1,8 +1,15 @@
 from django.db import models
 from datetime import datetime, timedelta
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext_lazy as _
 
 # Create your models here.
+
+def yearValidator(value):
+    if value > 2016 or value < 1900:
+        raise ValidationError('Year must between 1900 and 2016')
+    pass
 
 class Libuser(User):
     PROVINCE_CHOICES = (
@@ -20,7 +27,6 @@ class Libuser(User):
     def __str__(self):
         return self.first_name + ' ' + self.last_name
 
-
 class Libitem(models.Model):
     TYPE_CHOICES = (
     ('Book', 'Book'),
@@ -34,7 +40,7 @@ class Libitem(models.Model):
     duedate=models.DateField(default=None, null=True, blank=True)
     last_chkout = models.DateField(default=None, null=True, blank=True)
     date_acquired = models.DateField(default=datetime.today())
-    pubyr = models.IntegerField()
+    pubyr = models.IntegerField(validators=[yearValidator])
 
     def overdue(self):
         return 'Yes' if self.checked_out == True and self.duedate < datetime.today().date() else 'No'
@@ -42,7 +48,6 @@ class Libitem(models.Model):
 
     def __str__(self):
         return self.title
-
 
 class Book(Libitem):
     CATEGORY_CHOICES = (
@@ -59,7 +64,6 @@ class Book(Libitem):
 
     def __str__(self):
         return self.title + ' by ' + self.author
-
 
 class Dvd(Libitem):
     CATEGORY_CHOICES = (

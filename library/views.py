@@ -5,14 +5,12 @@ from library.forms import SuggestionForm, SearchlibForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.urlresolvers import reverse
+from django.views.generic import TemplateView
 import random
 
 
 # Import necessary classes
 # Create your views here.
-def index(request):
-    luckynum = request.session.get('luckynum', 0)
-    return render(request, 'library/index.html', {'user':request.user, 'luckynum':luckynum})
 
 def dvd(request):
     dvd = Dvd.objects.all()
@@ -29,21 +27,6 @@ def detail(request, item_id):
 def suggestions(request):
     suggestionlist = Suggestion.objects.all()[:10]
     return render(request, 'library/suggestions.html', {'itemlist':suggestionlist, 'user':request.user})
-
-def newitem(request):
-    suggestions = Suggestion.objects.all()
-    if request.method == 'POST':
-        form = SuggestionForm(request.POST)
-        if form.is_valid():
-            suggestion = form.save(commit=False)
-            suggestion.num_interested = 1
-            suggestion.save()
-            return HttpResponseRedirect(reverse('library:suggestions'))
-        else:
-            return render(request, 'library/newitem.html', {'form':form, 'suggestions':suggestions, 'user':request.user})
-    else:
-        form = SuggestionForm()
-    return render(request, 'library/newitem.html', {'form':form, 'suggestions':suggestions, 'user':request.user})
 
 def searchlib(request):
     form = SearchlibForm()
@@ -96,3 +79,30 @@ def myitems(request):
     except Libuser.DoesNotExist:
         message = 'You are not a Libuser!'
     return render(request, 'library/myitems.html', {'user':request.user, 'itemlist':items, 'message':message})
+
+class NewitemView(TemplateView):
+    template_name = "library/newitem.html"
+
+    def get(self, request):
+        suggestions = Suggestion.objects.all()
+        form = SuggestionForm()
+        return render(request, self.template_name, {'form':form, 'suggestions':suggestions, 'user':request.user})
+
+    def post(self, request):
+        suggestions = Suggestion.objects.all()
+        form = SuggestionForm(request.POST)
+        if form.is_valid():
+            suggestion = form.save(commit=False)
+            suggestion.num_interested = 1
+            suggestion.save()
+            return HttpResponseRedirect(reverse('library:suggestions'))
+        else:
+            return render(request, self.template_name, {'form':form, 'suggestions':suggestions, 'user':request.user})
+
+
+class IndexView(TemplateView):
+    template_name = "library/index.html"
+
+    def get(self, request):
+        luckynum = request.session.get('luckynum', 0)
+        return render(request, self.template_name, {'user':request.user, 'luckynum':luckynum})
